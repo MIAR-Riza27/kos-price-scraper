@@ -10,23 +10,33 @@ SCRAPER_CONFIG = {
     ),  # Template URL untuk setiap region
 
     # --- Timeout & Retry ---
-    "page_timeout": 15000,  # Timeout saat buka halaman (ms)
-    "load_timeout": 10000,  # Timeout tunggu elemen (ms)
+    "page_timeout": 20000,  # Increased for better stability
+    "load_timeout": 15000,  # Increased for bot detection handling
     "max_connection_retry": 3,  # Maksimal percobaan cek koneksi internet sebelum scraper berhenti
     "internet_check_timeout": 3,  # Timeout cek koneksi internet (detik)
     "internet_retry_sleep": 10,  # Jeda antar percobaan koneksi (detik)
     "max_card_retry": 2,  # Jumlah maksimal percobaan ulang (retry) untuk card yang gagal
 
+    # --- Anti-Bot Detection ---
+    "min_card_delay": 2.0,        # Minimum delay between cards (seconds)
+    "max_card_delay": 5.0,        # Maximum delay between cards (seconds)
+    "bot_detection_retry": 2,     # Max retries when bot detected
+    "cooldown_delay": [10, 20],   # Cooldown range when bot detected (seconds)
+
     # --- Scraping Logic ---
-    "max_load_more_clicks": 30,  # Maksimal klik tombol 'load more' per region
+    "max_load_more_clicks": 25,   # Reduced to be less aggressive
     "scroll_pause": [
-        1 / 3,
-        2 / 3,
-        1,
         0,
-    ],  # Posisi scroll saat buka detail kos (relatif tinggi halaman)
+        1 / 4,
+        1 / 2,
+        3 / 4,
+        1,
+        2 / 3,
+        1 / 3,
+        0,
+    ],  # More human-like scrolling pattern
     "completed_region_threshold": 150,  # Jika data region > ini, region dianggap sudah lengkap (skip)
-    "duplicate_exit_threshold": 20,  # Maksimal duplikat sebelum region dihentikan
+    "duplicate_exit_threshold": 15,  # Reduced to be more conservative
 
     # --- Backup & Data ---
     "backup_interval": 50,  # Backup otomatis setiap N card

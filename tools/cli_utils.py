@@ -3,7 +3,7 @@ from tools.config import SCRAPER_CONFIG
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="KosPrice Web Scraper")
     parser.add_argument(
         "--region",
         type=str,
@@ -53,6 +53,7 @@ def parse_args():
         "--start-end",
         type=str,
         default=None,
-        help="Range region dari list regions.py, format: start:end (contoh: --start-end 3:5 untuk region ke-3 sampai ke-4, seperti slicing Python).",
+        help="Range region, format: start:end (contoh: --start-end 3:5).",
     )
+    
     return parser.parse_args()
